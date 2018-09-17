@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>封装自己的类名</title>
+	<style>
+        div{
+        	width:50px;
+        	height: 50px;
+        	background-color:red;
+        	margin-top: 20px;
+        }
+	</style>
+	<script>
+         window.onload=function(){
+         	function getClass(classname,id){
+         		// 支持的情况
+         		if(document.getElementsByClassName){
+         			// 有id
+         			if(id){
+         				var eleId=document.getElementById(id);
+         				return eleId.getElementsByClassName(classname);
+         			}else{//没有id
+         				return document.getElementsByClassName(classname);
+         			}
+         		}
+
+                // 不支持的情况
+         			if(id){
+         				var eleId=document.getElementById(id);
+         				var dom =eleId.getElementsByTagName("*");
+         			}else{
+         				var dom=document.getElementsByTagName("*");
+         			}
+         			
+         		var arr=[];//用来存储所有的div数组
+         		for(var i=0;i<dom.length;i++){//用来遍历所有的标签
+         			var txtArr=dom[i].className.split(" ");//将每个标签里面的classname转化为数组
+         			// 遍历该数组里面的类名判断与传入参数是否对应
+                    for(var j=0;j<txtArr.length;j++){
+                    	if (txtArr[j]==classname){
+                    		// 将匹配到的div盒子加到准备好的空数组里面
+                    		arr.push(dom[i]);
+                    	}
+                    }
+         		}
+         		return arr;
+         	}
+            // 实例化参数
+         	var aa=getClass("test","one");
+         	for(var i=0;i<aa.length;i++){
+         		aa[i].style.backgroundColor='purple';
+         	}
+         }
+	</script>
+</head>
+<body>
+	<div class="demo test"></div>
+	<div class="demo"></div>
+	<div id="one">
+		<div class="test"></div>
+	    <div class="demo test"></div>
+	</div>
+</body>
+</html>

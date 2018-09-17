@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>星座运势</title>
+	<style>
+        .box{
+        	width:350px;
+        	height: 250px;
+        	border:1px solid #ccc;
+        	margin:100px auto;
+        }
+
+        .box .dt{
+        	padding-left:10px;
+        	line-height: 35px;
+        	font-weight: 700;
+        	color:#036;
+        }
+        
+        .box .dd{
+        	padding: 10px;
+        }
+        
+        .box .dd-t{
+        	overflow: hidden;
+        }
+
+        .box .dd .dd-t .icon{
+            width: 50px;
+            height: 50px;
+            float: left;
+        	background: url(icon.png) no-repeat;
+            margin-right: 10px;
+        }
+
+        .box .dd .dd-t .right{
+            float: right;
+            width:270px;
+            height: 50px;
+        }
+        .box .dd .dd-t .right .yunshi_lay{
+            width:300px;
+            height:35px;
+            overflow: hidden;
+        }
+
+         .box .dd .dd-t .right i{
+            width:68px;
+            height: 18px;
+            float: left;
+            line-height: 18px;   
+            font-size: 14px;
+            display: block;        
+         }
+
+        .box .dd .dd-t .right .yunshi{
+            width:80px;
+            height:13px;
+            display: block;
+            background: url(yunshi.png);
+            float: left;
+            position: relative;
+        }
+
+         .box .dd .dd-t .right .yunshi .star{
+            width:0;
+            height: 13px;
+            position: absolute;
+            top:0;
+            left:0;
+            background: url(yunshi.png) no-repeat bottom;
+         }
+	</style>
+    <script>
+        window.onload=function(){
+            function $(id){return document.getElementById(id);}   
+            var arr=[10,9,6,7,8,5,7,8,5,9,6,4];
+            var txtArr=["今天最会有一些外出跑动，沟通也比较顺畅，有心仪的人，可以再暧昧一下，但是今天不是好的表白时间，今天业绩财运不错，但是领导会对你的伙伴有好的评价，让你有点小心塞","今天你的心情不错，上司突然给你一个比较不错的外出工作机会，让你偷偷开心，但是要淡定，不要因为你的得到，而伤了他人的眼，也不要去任意讨论另一半或者合作伙伴的人际关系，最起码不要得意的自以为是","双子今天的投资想法还是蛮多的，，会去考察关注和吃喝，娱乐，宠物，孩子，培训教育方面的信息，工作事情也会比较多，其实会有很多机会，不要因为和领导或者合作者的思路理念不同就不屑去做，那样会错失一些不错的机会","有孩子的，今天让你烦恼的是子女问题，可能你的一些教育方式不能够得到家人或者朋友的认同，也会让你感到挫败感，。感情上呢，对方还是会比较支持你的想法的，但是没有感情的人的今天是可以就是有桃花的日子，但是一定要分清楚这些桃花是好还是坏","狮子座","处女座","天秤座","天蝎座","射手座","摩羯座","水瓶座","双鱼座"]
+            $("sele").onchange=function(){
+                $("ico").style.backgroundPosition="0 "+(-this.value*50)+"px";
+                $("content").innerHTML=txtArr[this.value];
+                $("xing").style.width=arr[this.value] *8+"px";
+            }
+        }
+    </script>
+</head>
+<body>
+	<div class="box">
+		<div class="dt">星座运势</div>
+		<div class="dd">
+			<div class="dd-t">
+				<div class="icon" id="ico"></div>
+				<div class="right">
+                    <select name="more" id="sele">
+                        <option value="0">白羊座(03.21-04.19)</option>
+                        <option value="1">金牛座(04.20-05.20)</option>
+                        <option value="2">双子座(05.21-06.21)</option>
+                        <option value="3">巨蟹座(06.22-07.22)</option>
+                        <option value="4">狮子座(07.23-08.22)</option>
+                        <option value="5">处女座(08.23-09.22)</option>
+                        <option value="6">天秤座(09.23-10.23)</option>
+                        <option value="7">天蝎座(10.24-11.22)</option>
+                        <option value="8">射手座(11.23-12.21)</option>
+                        <option value="9">摩羯座(12.22-01.19)</option>
+                        <option value="10">水瓶座(01.20-02.18)</option>
+                        <option value="11">双鱼座(02.19-03.20)</option>
+                    </select>
+                    <div class="yunshi_lay">
+                        <i>今日运势:</i>
+                        <span class="yunshi">
+                            <span class="star" id="xing"></span>
+                        </span>
+                    </div>
+                </div>
+			</div>
+			<div class="dd-b" id="content">
+				周五可以去考虑一下约会事宜了，今天的感情，还是会相处的比较融洽的，除了多花点钱以外，可能还...[详细]
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<!--笔记：1、这个案例最重要的就是要知道，value值、width、TATArr以及数组之间的关系
+       2、再者就是innerHTML,backgroundPosition的使用。 -->

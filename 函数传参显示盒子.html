@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自定义函数传参显示盒子</title>
+	<style>
+         div{
+         	height:300px;
+         	width:300px;
+         	background:#ff0000;
+         	display: none;
+         }
+	</style>
+	<script>
+        function fn(obj){
+            var target=document.getElementById(obj);
+            target.style.display="block";
+        }
+	</script>
+</head>
+<body>
+	<button onclick="fn('box1')">显示1</button>
+	<button onclick="fn('box2')">显示2</button>
+	<button onclick="fn('box3')">显示3</button>
+	<button onclick="fn('box4')">显示4</button>
+	<div id="box1">1</div>
+	<div id="box2">2</div>
+	<div id="box3">3</div>
+	<div id="box4">4</div>
+</body>
+</html>

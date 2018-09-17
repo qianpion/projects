@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>发送短信验证</title>
+</head>
+<body>
+	<input type="text"/>
+	<button id="btn">点击发送短信</button>
+</body>
+</html>
+<script>
+	var btn=document.getElementById("btn");
+	var count=10;
+	var timer=null;
+	btn.onclick=function(){
+            //clearInterval(timer);
+            this.disabled="disabled";
+
+            timer=setInterval(sendTextMessage, 1000);
+
+            function sendTextMessage(){
+        	count--;
+
+        	if(count>=0){
+        		btn.innerHTML="还剩"+count+"秒";
+        	}else{
+        		btn.innerHTML="重新发送";
+        		btn.disabled=false;
+        		clearInterval(timer);
+        		count=10;
+        	}
+           }
+	}
+</script>

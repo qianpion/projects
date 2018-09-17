@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>模拟水平滚动条</title>
+	<style>
+	    *{
+	    	margin:0;
+	    	padding: 0;
+	    }
+
+         .box{
+         	width: 600px;
+         	height: 20px;
+         	background: #ccc;
+         	margin:100px auto;
+         	position: relative;
+         }
+
+         .scrollbar{
+         	width: 15px;
+         	height: 30px;
+         	background: #345;
+         	position: absolute;
+         	top:-5px;
+         	left:0;
+         	cursor: pointer;
+         }
+
+         #mask{
+         	width: 0;
+         	height: 100%;
+         	background: #345;
+         	position: absolute;
+         	top:0;
+         	left:0;
+         }
+	</style>
+</head>
+<body>
+	<div class="box" id="box">
+		<div class="scrollbar" id="scrollbar"></div>
+		<div id="mask"></div>
+	</div>
+</body>
+</html>
+<script>
+	var box=document.getElementById("box");
+	var scrollbar=box.children[0];
+	var mask=box.children[1];
+
+	scrollbar.onmousedown=function(event){
+		var event=event||window.event;
+		var leftval=event.clientX-scrollbar.offsetLeft;
+
+        document.onmousemove=function(event){
+        var event=event||window.event;
+        scrollbar.style.left=event.clientX-leftval+"px";
+        
+        var val=parseInt(scrollbar.style.left);
+        if (val<0){
+        	scrollbar.style.left=0;
+        }else if(val>585){
+        	scrollbar.style.left="390px";
+        }
+         
+         mask.style.width=scrollbar.style.left;
+        }
+        document.onmouseup=function(){
+        	document.onmousemove=null;
+        }
+	}
+</script>

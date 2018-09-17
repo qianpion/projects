@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>封装scrollTop</title>
+	<style>
+         body{
+         	height: 3000px;
+         }
+	</style>
+</head>
+<body>
+	
+</body>
+</html>
+<script>
+	function scroll(){
+		if (window.pageYOffset !=null){//IE9以及正常浏览器
+			return{
+				left:window.pageXOffset,
+				top:window.pageYOffset
+			}
+		}else if(document.compatMode=="CSS1Compat"){//声明了DTD
+			return{
+				left:document.documentElement.scrollLeft,
+				top:document.documentElement.scrollTop
+			}
+		}
+        return{
+        	//怪异模式
+            left:document.body.scrollLeft,
+            top:document.body.scrollTop
+        }
+	}
+
+	window.onscroll=function(){
+		console.log(scroll().top);
+	}
+</script>

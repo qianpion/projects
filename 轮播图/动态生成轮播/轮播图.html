@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>轮播图自动滑动</title>
+	<style>
+         *{
+         	margin:0;
+         	padding:0;
+         }
+
+         ul,ol{
+         	list-style-type:none; 
+         }
+        
+        img{
+        	vertical-align: top;
+        }
+        .slider{
+        	width: 730px;
+        	height: 454px;
+        	border:1px solid #ccc;
+        	margin:100px auto;
+        	padding: 10px;
+        	position: relative;
+        }
+
+        .inner{
+        	width: 100%;
+        	height: 100%;
+        	background-color: pink;
+        	position: relative;
+        	overflow: hidden;
+        }
+        
+        .inner ul{
+        	width:1000%;
+        	position: absolute;
+        	top:0;
+        	left:0;
+        }
+
+       .slider .inner ul li{
+       	float: left;
+       }
+        
+        .slider ol{
+        	position: absolute;
+        	left:50%;
+        	margin-left: -100px;
+        	bottom: 10px;
+        }
+       .slider ol li{
+       	float: left;
+       	width: 18px;
+       	height: 18px;
+       	background-color: #fff;
+       	margin-right: 10px;
+       	border-radius: 50%;
+       	text-align: center;
+       	line-height: 18px;
+       	cursor: pointer;
+       }
+
+       .slider ol li.current{
+       	background-color: green;
+       }
+
+       #arr{
+        display: none;
+        /*position: relative;*/
+       }
+
+       #arr span{
+          display: block;
+          width:40px;
+          height: 40px;
+          position: absolute;
+          left: 5px;
+          top:50%;
+          margin-top: -20px;
+          background: #000;
+          cursor: pointer;
+          line-height: 40px;
+          text-align: center;
+          font-weight: bold;
+          font-family: '黑体';
+          font-size: 30px;
+          color: #fff;
+          opacity: 0.3;
+          border:1px solid #fff;
+       }
+
+      /* #arr #left{
+          float: left;
+          
+       }
+*/
+       #arr #right{
+          right:5px;
+          left: auto;
+       }
+	</style>
+</head>
+<body>
+	<div class="slider" id="slider">
+		<div class="inner">
+			<ul>
+				<li><img src="images/11.jpg" alt=""></li>
+				<li><img src="images/22.jpg" alt=""></li>
+				<li><img src="images/33.jpg" alt=""></li>
+				<li><img src="images/44.jpg" alt=""></li>
+				<li><img src="images/55.jpg" alt=""></li>
+				<li><img src="images/66.jpg" alt=""></li>
+			</ul>
+      <div id="arr">
+          <span id="left">＜</span>
+          <span id="right">＞</span>
+      </div>
+		</div>
+		<ol>
+			<li class="current">0</li>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol>
+    
+	</div>
+</body>
+</html>
+<script>
+	var slider=document.getElementById("slider");
+  var arr=document.getElementById("arr");
+  var left=document.getElementById("left");
+  var right=document.getElementById("right");
+	var ul=slider.children[0].children[0];
+	var ol=slider.children[1];
+	var ollis=ol.children;
+	var timer=null;
+  var leader=0,target=0;
+  
+	for(var i=0;i<ollis.length;i++){
+		ollis[i].index=i;
+		ollis[i].onclick=function(){
+			for(var j=0;j<ollis.length;j++){
+				ollis[j].className="";
+			}
+			this.className="current";
+			target=this.index*(-730);
+		}
+	}
+  
+  slider.onmouseover=function(){
+      arr.style.display="block";
+  }
+
+  slider.onmouseout=function(){
+    arr.style.display="none";
+  }
+
+  left.onclick=function(){
+      target += 730;
+  }
+
+  right.onclick=function(){
+      target -= 730;
+  }
+  
+   
+	timer=setInterval(autoPlay, 30);
+	function autoPlay(){
+         if(target >= 0)
+    {
+      target = 0;
+    }
+    else if(target <= -4380)
+    {
+      target = -3650;
+    }
+         leader=leader+(target-leader)/10;
+         ul.style.left=leader+"px";
+	}
+     
+   
+</script>

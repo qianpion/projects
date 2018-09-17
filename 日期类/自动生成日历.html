@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>自动生成日历</title>
+	<style>
+        .box{
+        	width: 150px;
+        	height: 180px;
+        	background-color: #369;
+        	margin:100px auto;
+        }
+
+        .box p{
+        	text-align: center;
+        	line-height: 60px;
+        	font-size: 12px;
+        	color:#fff;
+        }
+
+        .box span{
+        	display: block;
+        	width: 75px;
+        	height: 75px;
+        	/*padding:15px 30px;*/
+        	margin:0 auto;
+        	font-size: 50px;
+        	color:#ccc;
+        	background-color: yellowgreen;
+        	text-align: center;
+        	line-height: 75px;
+        }
+	</style>
+
+	<script>
+         window.onload=function(){
+             var calender=document.getElementById("calender");
+             var boys=calender.children;
+             
+             var arr=["星期日","星期一","星期二","星期三","星期四","星期五","星期六"];
+             var date=new Date();
+             boys[1].innerHTML=date.getDate();
+             boys[0].innerHTML=date.getFullYear()+"-"+(date.getMonth()+1)+"-"+date.getDate()+" "+arr[date.getDay()];
+
+         }
+	</script>
+</head>
+<body>
+	<div class="box" id="calender">
+		<p></p>
+		<span></span>
+	</div>
+</body>
+</html>

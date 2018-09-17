@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>求平均值</title>
+</head>
+<body>
+	<script>
+        function avg(array){
+        	var len=array.length;
+        	var sum=0;
+        	for(var i=0;i<len;i++){
+        		sum+=array[i];
+        	}
+        	return sum/len;
+        }
+
+        var arr=[2,4,6,8,10];
+
+        document.write(avg(arr));
+	</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态轮播图</title>
+	<style>
+	     *{
+             margin:0;
+             padding:0;
+	     }
+
+	     ul,ol{
+	     	list-style-type: none;
+	     }
+
+         .all{
+             border:1px solid #ccc;
+             width: 500px;
+             height: 200px;
+             padding: 7px;
+             margin:100px auto;
+             position: relative;
+         }
+
+         .screen{
+         	/*border:1px solid #ccc;*/
+            width: 500px;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+         }
+
+         .screen ul{
+         	width: 3000px;
+         	position: absolute;
+         	top:0;
+         	left: 0;
+         	/*overflow: hidden;*/
+         }
+
+         .screen li{
+         	width: 500px;
+         	height: 200px;
+            float: left;
+            /*overflow: hidden;*/
+         }
+
+         .screen li img{
+         	 vertical-align: top;
+         }
+
+         .all ol{
+         	position: absolute;
+         	right: 10px;
+         	bottom: 10px;
+         	line-height: 20px;
+         	text-align: center;
+         }
+
+         .all ol li{
+         	float: left;
+         	width: 20px;
+         	height: 20px;
+         	background: #fff;
+         	margin-left: 10px;
+         	cursor: pointer;
+         	border:1px solid #ccc;
+         }
+
+         .all ol li.current{
+              background: yellow;
+         }
+	</style>
+</head>
+<body>
+	<div class="all" id="all">
+		<div class="screen">
+			<ul id="ul">
+				<li><img src="images/1.jpg" alt="" width="500" height="200"></li>
+				<li><img src="images/2.jpg" alt="" width="500" height="200"></li>
+				<li><img src="images/3.jpg" alt="" width="500" height="200"></li>
+				<li><img src="images/4.jpg" alt="" width="500" height="200"></li>
+				<li><img src="images/5.jpg" alt="" width="500" height="200"></li>
+			</ul>
+		</div>
+		<!-- <ol>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ol> -->
+	</div>
+</body>
+</html>
+<script>
+    function animate(obj,target){
+        clearInterval(obj.timer);
+        var speed=obj.offsetLeft<target ? 15 : -15;
+        obj.timer=setInterval(function(){
+        	var result=target-obj.offsetLeft;
+        	obj.style.left=obj.offsetLeft+speed+"px";
+        	if(Math.abs(result)<=15){
+        		clearInterval(obj.timer);
+        		obj.style.left=target+"px";
+        	}
+        }, 10)
+    }
+	// 要做两件事：一要做无缝滚动；二做点击动画；
+    // 滚动的同时，ol里面的小方块随之改变
+    // 要判断滚动的张数是哪一张，还要判断滚动的小方块是哪一个
+
+	// 无缝滚动
+      // 克隆第一张，放到最后面
+      // 获取元素
+    var all=document.getElementById("all");
+    var ul=document.getElementById("ul");
+    var ullis=ul.children;
+
+   ul.appendChild(ul.children[0].cloneNode(true));
+      //创建ol和li
+      console.log(ullis.length);
+    var ol=document.createElement("ol");
+    all.appendChild(ol);
+    for(var i=0;i<ullis.length-1;i++){
+    	var li=document.createElement("li");
+    	li.innerHTML=i+1;
+    	ol.appendChild(li);
+    }
+    ol.children[0].className="current";
+    //开始动画
+    var ollis=ol.children;
+    console.log(ollis);
+    for(var i=0;i<ollis.length;i++){
+    	ollis[i].index=i;
+    	ollis[i].onmouseover=function(){
+    		for(var i=0;i<ollis.length;i++){
+    			ollis[i].className="";
+    		}
+    		this.className="current";
+    		animate(ul,-this.index*500);
+    		square=key=this.index;
+    	}
+    }
+   //添加定时器，做无缝滚动
+   var timer=null;
+   var key=0;//图片张数
+   var square=0;//控制小方块
+   timer=setInterval(autoplay, 1000);
+   function autoplay(){
+       key++;
+       if(key>ullis.length-1){
+            ul.style.left=0;
+            key=1;
+       }
+       animate(ul,-key*500);
+
+       square++;
+       if(square>ollis.length-1){
+       	square=0;
+       }
+       for(var i=0;i<ollis.length;i++){
+       	ollis[i].className="";
+       }
+       ollis[square].className="current";
+   }
+   //鼠标经过大盒子停止动画
+   all.onmouseover=function(){
+   	clearInterval(timer);
+   }
+   all.onmouseout=function(){
+   	timer=setInterval(autoplay, 1000);
+   }
+</script>

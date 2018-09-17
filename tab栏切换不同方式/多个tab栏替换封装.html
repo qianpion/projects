@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>多行tab栏切换封装</title>
+	<style>
+        #one,#two,#three{
+        	margin:100px auto;
+        	border:1px solid #ccc;
+        	width:500px;
+        	height:500px;
+            position: relative;
+        }
+        .top{
+
+        }
+        .top button{
+         	margin-left: 30px;
+
+         }
+
+        .bottom li{
+         	width:400px;
+         	height:300px;
+         	background: #ff0000;
+         	display: none;
+         	position:absolute;
+         	top:20px;
+         	left:0;
+
+         }
+        
+        .red{
+        	background-color: #ff0000;
+        }
+        
+        .bottom .show{
+        	display: block;
+        }
+	</style>
+
+	<script>
+         window.onload=function(){
+         	function tab(obj){
+         		var target=document.getElementById(obj);
+         		var lis=target.getElementsByTagName("li");
+         		// console.log(divs);
+         		var btns=target.getElementsByTagName("button");
+         		var len=btns.length;
+
+        	    for(var i=0;i<len;i++){
+        		    btns[i].index=i;
+        		    btns[i].onclick=function(){
+        		    	for(var j=0;j<len;j++){
+        				    btns[j].className="";
+        				    lis[j].className="";
+        			    }
+        			    this.className="red";
+        			    lis[this.index].className="show";
+        		    }
+        	    }
+         	}
+
+         	tab("one");
+         	tab("two");
+         	tab("three");
+        }
+	</script>
+</head>
+<body>
+	<div id="one">
+		<div class="top">
+			<button class="red">第一个</button>
+			<button>第二个</button>
+			<button>第三个</button>
+			<button>第四个</button>
+			<button>第五个</button>
+		</div>
+		<div class="bottom" id="change">
+			<ul>
+				<li class="show">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="two">
+		<div class="top">
+			<button class="red">第一个</button>
+			<button>第二个</button>
+			<button>第三个</button>
+			<button>第四个</button>
+			<button>第五个</button>
+		</div>
+		<div class="bottom" id="change">
+			<ul>
+				<li class="show">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="three">
+		<div class="top">
+			<button class="red">第一个</button>
+			<button>第二个</button>
+			<button>第三个</button>
+			<button>第四个</button>
+			<button>第五个</button>
+		</div>
+		<div class="bottom" id="change">
+			<ul>
+				<li class="show">1</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
